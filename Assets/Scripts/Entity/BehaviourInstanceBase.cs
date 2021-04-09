@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 
 /// <summary>
-/// Behaviour runtime script base
+/// Behaviour runtime script
 /// </summary>
-public abstract class BehaviourBase : MonoBehaviour
+public abstract class BehaviourInstanceBase : MonoBehaviour
 {
-    protected BehaviourSO m_BehaviourData;
-    public BehaviourSO BehaviourData { get { return m_BehaviourData; } }
+    protected BehaviourSO m_BehaviourSO;
+    public BehaviourSO BehaviourSO { get { return m_BehaviourSO; } }
 
     protected EntityInstance m_Entity;
     public EntityInstance Entity { get { return m_Entity; } }
@@ -19,8 +19,20 @@ public abstract class BehaviourBase : MonoBehaviour
     /// <param name="data"></param>
     public void OnCreated(BehaviourSO data)
     {
-        m_BehaviourData = data;
+        m_BehaviourSO = data;
     }
+
+    /// <summary>
+    /// Update all the parameters of this behaviour
+    /// </summary>
+    /// <param name="parameters">A list of parameter datas</param>
+    public virtual void UpdateAllParameters(List<BehaviourData.BehaviourParamData> parameterDatas) { }
+
+    /// <summary>
+    /// Update a parameter
+    /// </summary>
+    /// <param name="parameter"></param>
+    public virtual void UpdateParameter(BehaviourData.BehaviourParamData parameterData) { }
 
     /// <summary>
     /// Used in create mode, called when attached to an entity

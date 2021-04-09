@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -8,15 +9,16 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class EntityInstance : MonoBehaviour
 {
-    [NaughtyAttributes.ShowNonSerializedField]
-    private List<BehaviourBase> m_Behaviours = new List<BehaviourBase>();
+    [SerializeField]
+    private List<BehaviourInstanceBase> m_Behaviours = new List<BehaviourInstanceBase>();
+    public ReadOnlyCollection<BehaviourInstanceBase> Behaviours { get { return m_Behaviours.AsReadOnly(); } }
 
-    public void AttachBehaviour(BehaviourBase behaviour)
+    public void AttachBehaviour(BehaviourInstanceBase behaviour)
     {
         m_Behaviours.Add(behaviour);
     }
 
-    public void DetachBehaviour(BehaviourBase behaviour)
+    public void DetachBehaviour(BehaviourInstanceBase behaviour)
     {
         m_Behaviours.Remove(behaviour);
     }

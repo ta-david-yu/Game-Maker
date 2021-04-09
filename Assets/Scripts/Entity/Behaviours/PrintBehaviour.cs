@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PrintBehaviour : BehaviourBase
+public class PrintBehaviour : BehaviourInstanceBase
 {
     public override void OnClick()
     {

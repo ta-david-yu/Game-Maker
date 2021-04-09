@@ -727,11 +727,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c518cd0180b51a43984f923a7322be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Entities:
+  m_EntityGlobalHandler: {fileID: 11400000, guid: 473e62d20640e3f4580573b14070205c, type: 2}
+  m_EntitySOs:
   - {fileID: 11400000, guid: 01f5a03067970bc4da62be6cd833407c, type: 2}
-  m_BehaviourDatas:
+  - {fileID: 11400000, guid: 23f19acfe57fe944aad4e0c02b53abec, type: 2}
+  m_BehaviourSOs:
   - {fileID: 11400000, guid: 779f4db01d3632a468e3162cfeb85df5, type: 2}
   m_Camera: {fileID: 295419608}
+  m_SelectedEntityInstance: {fileID: 0}
 --- !u!1 &2141373077
 GameObject:
   m_ObjectHideFlags: 0

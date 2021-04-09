@@ -61,8 +61,6 @@ public class BehaviourSOEditor : Editor
                     serializedObject.ApplyModifiedProperties();
 
                     EditorUtility.SetDirty(m_BehaviourSO);
-
-                    m_NewParamName = $"New Param {m_Parameters.arraySize}"; 
                 }
         }
 
