@@ -9,9 +9,16 @@ using UnityEngine.EventSystems;
 /// </summary>
 public class EntityInstance : MonoBehaviour
 {
+    public int ID { get; private set; }
+
     [SerializeField]
     private List<BehaviourInstanceBase> m_Behaviours = new List<BehaviourInstanceBase>();
     public ReadOnlyCollection<BehaviourInstanceBase> Behaviours { get { return m_Behaviours.AsReadOnly(); } }
+
+    public void OnInstantiate(int id)
+    {
+        ID = id;
+    }
 
     public void AttachBehaviour(BehaviourInstanceBase behaviour)
     {

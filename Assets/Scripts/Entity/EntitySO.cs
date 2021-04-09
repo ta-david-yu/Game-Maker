@@ -8,9 +8,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "Entity SO", menuName = "Game Data/Entity SO")]
 public class EntitySO : ScriptableObject
 {
+    [UnityEngine.Serialization.FormerlySerializedAs("m_EntityName")]
     [SerializeField]
-    private string m_EntityName = "Entity";
-    public string EntityName { get { return m_EntityName; } }
+    private string m_EntityDefaultName = "Entity";
+    public string EntityDefaultName { get { return m_EntityDefaultName; } }
 
     [SerializeField]
     private EntityInstance m_EntityPrefab;

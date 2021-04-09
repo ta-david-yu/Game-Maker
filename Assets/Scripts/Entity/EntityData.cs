@@ -32,6 +32,7 @@ public struct BehaviourData
 [System.Serializable]
 public struct EntityData
 {
+    public string EntityName;
     public EntitySO EntitySO;
     public List<BehaviourData> BehaviourDatas;
 }

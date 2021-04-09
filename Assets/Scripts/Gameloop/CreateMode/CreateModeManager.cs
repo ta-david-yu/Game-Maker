@@ -30,27 +30,57 @@ public class CreateModeManager : MonoBehaviour
     private Camera m_Camera;
 
     [SerializeField]
+    private Transform m_EntityRoot;
+
+    [SerializeField]
     private Tool m_Tool = Tool.Paint;
 
     [SerializeField]
     private EntityInstance m_SelectedEntityInstance;
 
-    private List<EntityInstance> m_EntityInstances = new List<EntityInstance>();
-    public ReadOnlyCollection<EntityInstance> EntityInstances { get { return m_EntityInstances.AsReadOnly(); } }
+    [SerializeField]
+    private int m_PaintIndex = 0;
+
+    [Header("Settings")]
+
+    [SerializeField]
+    private LayerMask m_LayerMask;
+
+    private List<EntityData> m_EntityPalette = new List<EntityData>();
 
     private void Awake()
     {
         m_EntityGlobalHandler.EntityEntries = new List<EntityGlobalHandler.EntityEntry>();
-    }
+        m_EntityGlobalHandler.EntityRoot = m_EntityRoot;
 
-    private void Update()
-    {
-        
+        for (int i = 0; i < m_EntitySOs.Count; i++)
+        {
+            var entitySO = m_EntitySOs[i];
+            m_EntityPalette.Add(
+                new EntityData() { 
+                    EntityName = entitySO.EntityDefaultName,
+                    EntitySO = entitySO, 
+                    BehaviourDatas = new List<BehaviourData>() });
+        }
     }
 
     private void OnDestroy()
     {
-        m_EntityGlobalHandler.EntityEntries = new List<EntityGlobalHandler.EntityEntry>();
+        m_EntityGlobalHandler.EntityRoot = null;
+    }
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            var ray = m_Camera.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, m_LayerMask))
+            {
+                var entry = m_EntityGlobalHandler.CreateEntity(m_EntityPalette[m_PaintIndex]);
+                entry.Instance.transform.position = hit.point;
+            }
+        }
     }
 
     private void OnGUI()
@@ -58,16 +88,15 @@ public class CreateModeManager : MonoBehaviour
         using (new GUILayout.VerticalScope(new GUIStyle("box"), GUILayout.Width(240)))
         {
             // Create Button
-            for (int i = 0; i < m_EntitySOs.Count; i++)
+            for (int i = 0; i < m_EntityPalette.Count; i++)
             {
-                var entitySO = m_EntitySOs[i];
+                var entityData = m_EntityPalette[i];
 
                 using (new GUILayout.VerticalScope())
                 {
-                    if (GUILayout.Button($"Create {entitySO.EntityName}"))
+                    if (GUILayout.Button($"Choose {entityData.EntitySO.EntityDefaultName}"))
                     {
-                        var entry = m_EntityGlobalHandler.CreateEmptyEntity(entitySO);
-
+                        m_PaintIndex = i;
                     }
                 }
             }
@@ -89,12 +118,20 @@ public class CreateModeManager : MonoBehaviour
 
                         var originalGUIColor = GUI.color;
                         GUI.color = (entry.Instance == m_SelectedEntityInstance) ? Color.yellow : originalGUIColor;
-                        if (GUILayout.Button($"{entry.Data.EntitySO.EntityName}", GUILayout.MaxWidth(180)))
+                        if (GUILayout.Button($"{entry.Data.EntityName}", GUILayout.MaxWidth(180)))
                         {
                             m_SelectedEntityInstance = entry.Instance;
                         }
                         GUI.color = originalGUIColor;
                     }
+                }
+            }
+
+            if (m_SelectedEntityInstance)
+            {
+                using (new GUILayout.VerticalScope(new GUIStyle("box")))
+                {
+                    //GUILayout.Label($"{m_SelectedEntityInstance.}")
                 }
             }
         }

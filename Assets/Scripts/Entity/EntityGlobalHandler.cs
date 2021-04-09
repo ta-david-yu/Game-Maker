@@ -18,6 +18,8 @@ public class EntityGlobalHandler : ScriptableObject
         public EntityInstance Instance;
     }
 
+    public int EntityIDCounter { get; private set; } = 0;
+
     public Transform EntityRoot { get; set; }
 
     public List<EntityEntry> EntityEntries = new List<EntityEntry>();
@@ -29,15 +31,24 @@ public class EntityGlobalHandler : ScriptableObject
     /// <returns></returns>
     public EntityEntry CreateEmptyEntity(EntitySO entitySO)
     {
-        EntityData data = new EntityData() { EntitySO = entitySO, BehaviourDatas = new List<BehaviourData>() };
+        int id = EntityIDCounter;
+
+        EntityData data = new EntityData() { 
+            EntityName = entitySO.EntityDefaultName, 
+            EntitySO = entitySO, 
+            BehaviourDatas = new List<BehaviourData>() };
 
         // Create new entity instance
         // TODO: allocate from an object pool
-        EntityInstance newInstance = Instantiate(data.EntitySO.EntityPrefab);
+        EntityInstance newInstance = Instantiate(data.EntitySO.EntityPrefab, EntityRoot);
+        newInstance.gameObject.name = data.EntityName;
 
         // Register entry to the list
         EntityEntry entry = new EntityEntry() { Data = data, Instance = newInstance };
         EntityEntries.Add(entry);
+        newInstance.OnInstantiate(id);
+
+        EntityIDCounter++;
 
         return entry;
     }
@@ -49,9 +60,12 @@ public class EntityGlobalHandler : ScriptableObject
     /// <returns></returns>
     public EntityEntry CreateEntity(EntityData data)
     {
+        int id = EntityIDCounter;
+
         // Create new entity instance
         // TODO: allocate from an object pool
-        EntityInstance newInstance = Instantiate(data.EntitySO.EntityPrefab);
+        EntityInstance newInstance = Instantiate(data.EntitySO.EntityPrefab, EntityRoot);
+        newInstance.gameObject.name = data.EntityName;
 
         // Attach behaviours and setup parameters
         for (int i = 0; i < data.BehaviourDatas.Count; i++)
@@ -64,6 +78,9 @@ public class EntityGlobalHandler : ScriptableObject
         // Register entry to the list
         EntityEntry entry = new EntityEntry() { Data = data, Instance = newInstance };
         EntityEntries.Add(entry);
+        newInstance.OnInstantiate(id);
+
+        EntityIDCounter++;
 
         return entry;
     }
