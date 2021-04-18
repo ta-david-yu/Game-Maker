@@ -26,7 +26,13 @@ public abstract class BehaviourInstanceBase : MonoBehaviour
     /// Update all the parameters of this behaviour
     /// </summary>
     /// <param name="parameters">A list of parameter datas</param>
-    public virtual void UpdateAllParameters(List<BehaviourData.BehaviourParamData> parameterDatas) { }
+    public virtual void UpdateAllParameters(List<BehaviourData.BehaviourParamData> parameterDatas) 
+    { 
+        for (int i = 0; i < parameterDatas.Count; i++)
+        {
+            UpdateParameter(parameterDatas[i]);
+        }
+    }
 
     /// <summary>
     /// Update a parameter

@@ -42,38 +42,6 @@ public class MeshBehaviour : BehaviourInstanceBase
     [SerializeField]
     private List<MaterialSet> m_MaterialSets;
 
-    public override void UpdateAllParameters(List<BehaviourData.BehaviourParamData> parameterDatas)
-    {
-        for (int i = 0; i < parameterDatas.Count; i++)
-        {
-            var parameterData = parameterDatas[i];
-            if (parameterData.BehaviourParamSO.GetInstanceID() == m_MeshTypeParameterSO.GetInstanceID())
-            {
-                for (int j = 0; j < m_MeshSets.Count; j++)
-                {
-                    var set = m_MeshSets[j];
-                    if (set.MeshName == parameterData.Value)
-                    {
-                        m_MeshFilter.sharedMesh = set.MeshAsset;
-                        break;
-                    }
-                }
-            }
-            else if (parameterData.BehaviourParamSO.GetInstanceID() == m_MaterialTypeParameterSO.GetInstanceID())
-            {
-                for (int j = 0; j < m_MeshSets.Count; j++)
-                {
-                    var set = m_MaterialSets[j];
-                    if (set.MaterialName == parameterData.Value)
-                    {
-                        m_MeshRenderer.sharedMaterial = set.MaterialAsset;
-                        break;
-                    }
-                }
-            }
-        }
-    }
-
     public override void UpdateParameter(BehaviourData.BehaviourParamData parameterData)
     {
         if (parameterData.BehaviourParamSO.GetInstanceID() == m_MeshTypeParameterSO.GetInstanceID())

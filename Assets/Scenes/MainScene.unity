@@ -771,6 +771,10 @@ MonoBehaviour:
         Value: Cube
       - BehaviourParamSO: {fileID: 11400000, guid: ec843d55d52b0f246b58b96281fc94bf, type: 2}
         Value: Yellow
+    - BehaviourSO: {fileID: 11400000, guid: 9bda79febcca7d1479cf828a984bdc24, type: 2}
+      ParamDatas:
+      - BehaviourParamSO: {fileID: 11400000, guid: fdcdb0ef65edbdc40a458aee09267f4d, type: 2}
+        Value: Box
   - EntityName: SphereEntity
     EntitySO: {fileID: 11400000, guid: 87eeef4b677bc604e8800dd39607c5e3, type: 2}
     BehaviourDatas:
@@ -780,6 +784,10 @@ MonoBehaviour:
         Value: Sphere
       - BehaviourParamSO: {fileID: 11400000, guid: ec843d55d52b0f246b58b96281fc94bf, type: 2}
         Value: Blue
+    - BehaviourSO: {fileID: 11400000, guid: 9bda79febcca7d1479cf828a984bdc24, type: 2}
+      ParamDatas:
+      - BehaviourParamSO: {fileID: 11400000, guid: fdcdb0ef65edbdc40a458aee09267f4d, type: 2}
+        Value: Sphere
   m_Camera: {fileID: 295419608}
   m_EntityRoot: {fileID: 271956343}
   m_Tool: 0
