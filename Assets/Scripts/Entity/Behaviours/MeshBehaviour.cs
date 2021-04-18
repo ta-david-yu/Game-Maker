@@ -11,18 +11,36 @@ public class MeshBehaviour : BehaviourInstanceBase
         public Mesh MeshAsset;
     }
 
+    [System.Serializable]
+    private struct MaterialSet
+    {
+        public string MaterialName;
+        public Material MaterialAsset;
+    }
+
     [Header("Reference")]
 
     [SerializeField]
     private BehaviourParamSO m_MeshTypeParameterSO;
 
     [SerializeField]
+    private BehaviourParamSO m_MaterialTypeParameterSO;
+
+    [Space]
+
+    [SerializeField]
     private MeshFilter m_MeshFilter;
+
+    [SerializeField]
+    private MeshRenderer m_MeshRenderer;
 
     [Header("Settings")]
 
     [SerializeField]
     private List<MeshSet> m_MeshSets;
+
+    [SerializeField]
+    private List<MaterialSet> m_MaterialSets;
 
     public override void UpdateAllParameters(List<BehaviourData.BehaviourParamData> parameterDatas)
     {
@@ -41,6 +59,18 @@ public class MeshBehaviour : BehaviourInstanceBase
                     }
                 }
             }
+            else if (parameterData.BehaviourParamSO.GetInstanceID() == m_MaterialTypeParameterSO.GetInstanceID())
+            {
+                for (int j = 0; j < m_MeshSets.Count; j++)
+                {
+                    var set = m_MaterialSets[j];
+                    if (set.MaterialName == parameterData.Value)
+                    {
+                        m_MeshRenderer.sharedMaterial = set.MaterialAsset;
+                        break;
+                    }
+                }
+            }
         }
     }
 
@@ -54,6 +84,18 @@ public class MeshBehaviour : BehaviourInstanceBase
                 if (set.MeshName == parameterData.Value)
                 {
                     m_MeshFilter.sharedMesh = set.MeshAsset;
+                    break;
+                }
+            }
+        }
+        else if (parameterData.BehaviourParamSO.GetInstanceID() == m_MaterialTypeParameterSO.GetInstanceID())
+        {
+            for (int j = 0; j < m_MeshSets.Count; j++)
+            {
+                var set = m_MaterialSets[j];
+                if (set.MaterialName == parameterData.Value)
+                {
+                    m_MeshRenderer.sharedMaterial = set.MaterialAsset;
                     break;
                 }
             }

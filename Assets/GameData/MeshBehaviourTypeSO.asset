@@ -16,3 +16,4 @@ MonoBehaviour:
   m_BehaviourPrefab: {fileID: 1139155042334389504, guid: 4446885df2c8f8b4cb53330ccb972068, type: 3}
   m_Parameters:
   - {fileID: 11400000, guid: 91cf797018ba5be4f903971c8b2fff54, type: 2}
+  - {fileID: 11400000, guid: ec843d55d52b0f246b58b96281fc94bf, type: 2}

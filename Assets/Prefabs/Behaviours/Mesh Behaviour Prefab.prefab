@@ -46,12 +46,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_MeshTypeParameterSO: {fileID: 11400000, guid: 91cf797018ba5be4f903971c8b2fff54, type: 2}
+  m_MaterialTypeParameterSO: {fileID: 11400000, guid: ec843d55d52b0f246b58b96281fc94bf, type: 2}
   m_MeshFilter: {fileID: 9169269310072855857}
+  m_MeshRenderer: {fileID: 3792263539813326552}
   m_MeshSets:
   - MeshName: Cube
     MeshAsset: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   - MeshName: Sphere
     MeshAsset: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+  m_MaterialSets:
+  - MaterialName: Yellow
+    MaterialAsset: {fileID: 2100000, guid: 0e9097ca64b00164e82fc490dd101a31, type: 2}
+  - MaterialName: Blue
+    MaterialAsset: {fileID: 2100000, guid: ce00e2de90862514ca2a73144cf896d7, type: 2}
 --- !u!33 &9169269310072855857
 MeshFilter:
   m_ObjectHideFlags: 0
