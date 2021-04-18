@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 /// <summary>
 /// Keep tracks of all the entity datas and their instances
 /// </summary>
 [CreateAssetMenu(fileName = "Entity Global Handler", menuName = "Global Handler/Entity Global Handler")]
-public class EntityGlobalHandler : ScriptableObject
+public class EntityGlobalHandler : ScriptableObject, ISerializationCallbackReceiver
 {
     /// <summary>
     /// Keep tracks of entity data and instance
@@ -22,7 +23,56 @@ public class EntityGlobalHandler : ScriptableObject
 
     public Transform EntityRoot { get; set; }
 
-    public List<EntityEntry> EntityEntries = new List<EntityEntry>();
+    [System.NonSerialized]
+    private List<EntityEntry> m_EntityEntries = new List<EntityEntry>();
+    public ReadOnlyCollection<EntityEntry> EntityEntries { get { return m_EntityEntries.AsReadOnly(); } }
+
+    [System.NonSerialized]
+    private Dictionary<int, EntityEntry> m_EntityEntryLookUpTable = new Dictionary<int, EntityEntry>();
+
+    public void OnAfterDeserialize()
+    {
+        EntityEntries = new List<EntityEntry>();
+        m_EntityEntryLookUpTable = new Dictionary<int, EntityEntry>();
+    }
+
+    public void OnBeforeSerialize()
+    {
+    }
+
+    public EntityEntry GetEntityEntry(int entityID)
+    {
+        if (m_EntityEntryLookUpTable.ContainsKey(entityID))
+        {
+            return m_EntityEntryLookUpTable[entityID];
+        }
+        return null;
+    }
+
+    /// <summary>
+    /// Create a new level, delete all the entities in the scene
+    /// </summary>
+    public void CreateNewScene()
+    {
+        for (int i = 0; i < EntityEntries.Count; i++)
+        {
+            var entityInstance = EntityEntries[i].Instance;
+
+            // Remove behaviour from the entity instance and the behaviourSO
+            for (int j = 0; j < entityInstance.Behaviours.Count; j++)
+            {
+                var behaviourInstance = entityInstance.Behaviours[i];
+                behaviourInstance.BehaviourSO.RemoveBehaviourFromEntity(entityInstance, behaviourInstance);
+            }
+
+            // Delete entity instance
+            // TODO: recycle to an object pool
+            Destroy(entityInstance.gameObject);
+        }
+
+        m_EntityEntries = new List<EntityEntry>();
+        m_EntityEntryLookUpTable = new Dictionary<int, EntityEntry>();
+    }
 
     /// <summary>
     /// Create an entity without any given data
@@ -39,13 +89,13 @@ public class EntityGlobalHandler : ScriptableObject
             BehaviourDatas = new List<BehaviourData>() };
 
         // Create new entity instance
-        // TODO: allocate from an object pool
         EntityInstance newInstance = Instantiate(data.EntitySO.EntityPrefab, EntityRoot);
         newInstance.gameObject.name = data.EntityName;
 
         // Register entry to the list
         EntityEntry entry = new EntityEntry() { Data = data, Instance = newInstance };
-        EntityEntries.Add(entry);
+        m_EntityEntries.Add(entry);
+        m_EntityEntryLookUpTable.Add(id, entry);
         newInstance.OnInstantiate(id);
 
         EntityIDCounter++;
@@ -63,7 +113,6 @@ public class EntityGlobalHandler : ScriptableObject
         int id = EntityIDCounter;
 
         // Create new entity instance
-        // TODO: allocate from an object pool
         EntityInstance newInstance = Instantiate(data.EntitySO.EntityPrefab, EntityRoot);
         newInstance.gameObject.name = data.EntityName;
 
@@ -77,7 +126,8 @@ public class EntityGlobalHandler : ScriptableObject
 
         // Register entry to the list
         EntityEntry entry = new EntityEntry() { Data = data, Instance = newInstance };
-        EntityEntries.Add(entry);
+        m_EntityEntries.Add(entry);
+        m_EntityEntryLookUpTable.Add(id, entry);
         newInstance.OnInstantiate(id);
 
         EntityIDCounter++;
@@ -102,7 +152,8 @@ public class EntityGlobalHandler : ScriptableObject
             var entry = EntityEntries[i];
             if (entry.Instance == entityInstance)
             {
-                EntityEntries.RemoveAt(i);
+                m_EntityEntries.RemoveAt(i);
+                m_EntityEntryLookUpTable.Remove(entry.Instance.ID);
                 break;
             }
         }

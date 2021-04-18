@@ -7,8 +7,9 @@ public class CreateModeManager : MonoBehaviour
 {
     public enum Tool
     {
-        Paint,
-        Select
+        Paint = 0,
+        Select,
+        NumOfTools
     }
 
     [Header("Globla Handler")]
@@ -50,7 +51,7 @@ public class CreateModeManager : MonoBehaviour
 
     private void Awake()
     {
-        m_EntityGlobalHandler.EntityEntries = new List<EntityGlobalHandler.EntityEntry>();
+        m_EntityGlobalHandler.CreateNewScene();
         m_EntityGlobalHandler.EntityRoot = m_EntityRoot;
 
         for (int i = 0; i < m_EntitySOs.Count; i++)
@@ -87,6 +88,14 @@ public class CreateModeManager : MonoBehaviour
     {
         using (new GUILayout.VerticalScope(new GUIStyle("box"), GUILayout.Width(240)))
         {
+            // Tools
+            using (new GUILayout.HorizontalScope(new GUIStyle("box")))
+            {
+                //for (int i = 0; i < )
+            }
+
+            GUILayout.Space(24);
+
             // Create Button
             for (int i = 0; i < m_EntityPalette.Count; i++)
             {
@@ -101,9 +110,16 @@ public class CreateModeManager : MonoBehaviour
                 }
             }
 
+            GUILayout.Space(24);
+
             // Entity Hierarchy
             using (new GUILayout.VerticalScope())
             {
+                if (GUILayout.Button("New Scene"))
+                {
+                    m_EntityGlobalHandler.CreateNewScene();
+                }
+
                 for (int i = 0; i < m_EntityGlobalHandler.EntityEntries.Count; i++)
                 {
                     var entry = m_EntityGlobalHandler.EntityEntries[i];
