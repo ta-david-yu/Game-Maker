@@ -32,7 +32,7 @@ public class EntityGlobalHandler : ScriptableObject, ISerializationCallbackRecei
 
     public void OnAfterDeserialize()
     {
-        EntityEntries = new List<EntityEntry>();
+        m_EntityEntries = new List<EntityEntry>();
         m_EntityEntryLookUpTable = new Dictionary<int, EntityEntry>();
     }
 
@@ -79,7 +79,7 @@ public class EntityGlobalHandler : ScriptableObject, ISerializationCallbackRecei
     /// </summary>
     /// <param name="entitySO">The entity base SO</param>
     /// <returns></returns>
-    public EntityEntry CreateEmptyEntity(EntitySO entitySO)
+    public EntityEntry CreateEmptyEntity(EntityTypeSO entitySO)
     {
         int id = EntityIDCounter;
 

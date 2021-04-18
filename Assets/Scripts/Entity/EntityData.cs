@@ -22,7 +22,7 @@ public struct BehaviourData
         public string Value;
     }
 
-    public BehaviourSO BehaviourSO;
+    public BehaviourTypeSO BehaviourSO;
     public List<BehaviourParamData> ParamDatas;
 }
 
@@ -33,6 +33,6 @@ public struct BehaviourData
 public struct EntityData
 {
     public string EntityName;
-    public EntitySO EntitySO;
+    public EntityTypeSO EntitySO;
     public List<BehaviourData> BehaviourDatas;
 }

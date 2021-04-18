@@ -7,8 +7,8 @@ using UnityEngine;
 /// </summary>
 public abstract class BehaviourInstanceBase : MonoBehaviour
 {
-    protected BehaviourSO m_BehaviourSO;
-    public BehaviourSO BehaviourSO { get { return m_BehaviourSO; } }
+    protected BehaviourTypeSO m_BehaviourSO;
+    public BehaviourTypeSO BehaviourSO { get { return m_BehaviourSO; } }
 
     protected EntityInstance m_Entity;
     public EntityInstance Entity { get { return m_Entity; } }
@@ -17,7 +17,7 @@ public abstract class BehaviourInstanceBase : MonoBehaviour
     /// Used in create mode, called when instantiated
     /// </summary>
     /// <param name="data"></param>
-    public void OnCreated(BehaviourSO data)
+    public void OnCreated(BehaviourTypeSO data)
     {
         m_BehaviourSO = data;
     }

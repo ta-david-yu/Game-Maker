@@ -6,8 +6,8 @@ using UnityEngine;
 /// <summary>
 /// SO holding behaviour information
 /// </summary>
-[CreateAssetMenu(fileName = "Behaviour SO", menuName = "Game Data/Behaviour SO")]
-public class BehaviourSO : ScriptableObject
+[CreateAssetMenu(fileName = "BehaviourType SO", menuName = "Game Data/BehaviourType SO")]
+public class BehaviourTypeSO : ScriptableObject
 {
     [SerializeField]
     private string m_BehaviourName;

@@ -4,17 +4,17 @@ using UnityEngine;
 using UnityEditor;
 using System.IO;
 
-[CustomEditor(typeof(BehaviourSO))]
+[CustomEditor(typeof(BehaviourTypeSO))]
 public class BehaviourSOEditor : Editor
 {
-    private BehaviourSO m_BehaviourSO;
+    private BehaviourTypeSO m_BehaviourSO;
     private SerializedProperty m_Parameters;
 
     private string m_NewParamName = "New Param";
 
     protected void OnEnable()
     {
-        m_BehaviourSO = target as BehaviourSO;
+        m_BehaviourSO = target as BehaviourTypeSO;
         m_Parameters = serializedObject.FindProperty(nameof(m_Parameters));
     }
 

@@ -20,10 +20,10 @@ public class CreateModeManager : MonoBehaviour
     [Header("Data")]
 
     [SerializeField]
-    private List<EntitySO> m_EntitySOs;
+    private List<EntityTypeSO> m_EntitySOs;
 
     [SerializeField]
-    private List<BehaviourSO> m_BehaviourSOs;
+    private List<BehaviourTypeSO> m_BehaviourSOs;
 
     [Header("Reference")]
 
