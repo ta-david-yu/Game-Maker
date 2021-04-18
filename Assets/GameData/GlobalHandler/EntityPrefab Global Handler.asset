@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a249fbfbff5726445974dbf81bcbfc5c, type: 3}
+  m_Name: EntityPrefab Global Handler
+  m_EditorClassIdentifier: 
+  m_DefaultEntityDatas:
+  - EntityName: CubeEntity
+    EntitySO: {fileID: 11400000, guid: 87eeef4b677bc604e8800dd39607c5e3, type: 2}
+    BehaviourDatas:
+    - BehaviourSO: {fileID: 11400000, guid: 5c7d6d78b59c72c47b6bf46c5bcbc7f3, type: 2}
+      ParamDatas:
+      - BehaviourParamSO: {fileID: 11400000, guid: 91cf797018ba5be4f903971c8b2fff54, type: 2}
+        Value: Cube
+      - BehaviourParamSO: {fileID: 11400000, guid: ec843d55d52b0f246b58b96281fc94bf, type: 2}
+        Value: Yellow
+    - BehaviourSO: {fileID: 11400000, guid: 9bda79febcca7d1479cf828a984bdc24, type: 2}
+      ParamDatas:
+      - BehaviourParamSO: {fileID: 11400000, guid: fdcdb0ef65edbdc40a458aee09267f4d, type: 2}
+        Value: Box
+  - EntityName: SphereEntity
+    EntitySO: {fileID: 11400000, guid: 87eeef4b677bc604e8800dd39607c5e3, type: 2}
+    BehaviourDatas:
+    - BehaviourSO: {fileID: 11400000, guid: 5c7d6d78b59c72c47b6bf46c5bcbc7f3, type: 2}
+      ParamDatas:
+      - BehaviourParamSO: {fileID: 11400000, guid: 91cf797018ba5be4f903971c8b2fff54, type: 2}
+        Value: Sphere
+      - BehaviourParamSO: {fileID: 11400000, guid: ec843d55d52b0f246b58b96281fc94bf, type: 2}
+        Value: Blue
+    - BehaviourSO: {fileID: 11400000, guid: 9bda79febcca7d1479cf828a984bdc24, type: 2}
+      ParamDatas:
+      - BehaviourParamSO: {fileID: 11400000, guid: fdcdb0ef65edbdc40a458aee09267f4d, type: 2}
+        Value: Sphere

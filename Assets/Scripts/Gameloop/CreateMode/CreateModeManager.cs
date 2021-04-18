@@ -15,17 +15,16 @@ public class CreateModeManager : MonoBehaviour
     [Header("Globla Handler")]
 
     [SerializeField]
-    private EntityGlobalHandler m_EntityGlobalHandler;
+    private SceneGlobalHandler m_SceneGlobalHandler;
+
+    [SerializeField]
+    private EntityPrefabGlobalHandler m_EntityPrefabGlobalHandler;
 
     [Header("Data")]
 
     [UnityEngine.Serialization.FormerlySerializedAs("m_BehaviourSOs")]
     [SerializeField]
     private List<BehaviourTypeSO> m_BehaviourTypes;
-
-    [SerializeField]
-    [UnityEngine.Serialization.FormerlySerializedAs("m_EntityDatsa")]
-    private List<EntityData> m_DefaultEntityDatas;
 
     [Header("Reference")]
 
@@ -36,43 +35,26 @@ public class CreateModeManager : MonoBehaviour
     private Transform m_EntityRoot;
 
     [SerializeField]
-    private Tool m_Tool = Tool.Paint;
-
-    [SerializeField]
     private EntityInstance m_SelectedEntityInstance;
 
     [SerializeField]
-    private int m_PaintIndex = 0;
+    private int m_PrefabIndex = 0;
 
     [Header("Settings")]
 
     [SerializeField]
-    private LayerMask m_LayerMask;
-
-    private List<EntityData> m_EntityPalette = new List<EntityData>();
+    [UnityEngine.Serialization.FormerlySerializedAs("m_LayerMask")]
+    private LayerMask m_CreateLayerMask;
 
     private void Awake()
     {
-        m_EntityGlobalHandler.CreateNewScene();
-        m_EntityGlobalHandler.EntityRoot = m_EntityRoot;
-
-        m_EntityPalette.AddRange(m_DefaultEntityDatas);
-
-        /*
-        for (int i = 0; i < m_EntityTypes.Count; i++)
-        {
-            var entitySO = m_EntityTypes[i];
-            m_EntityPalette.Add(
-                new EntityData() { 
-                    EntityName = entitySO.EntityDefaultName,
-                    EntitySO = entitySO, 
-                    BehaviourDatas = new List<BehaviourData>() });
-        }*/
+        m_SceneGlobalHandler.CreateNewScene();
+        m_SceneGlobalHandler.EntityRoot = m_EntityRoot;
     }
 
     private void OnDestroy()
     {
-        m_EntityGlobalHandler.EntityRoot = null;
+        m_SceneGlobalHandler.EntityRoot = null;
     }
 
     private void Update()
@@ -81,9 +63,9 @@ public class CreateModeManager : MonoBehaviour
         {
             var ray = m_Camera.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity, m_LayerMask))
+            if (Physics.Raycast(ray, out hit, Mathf.Infinity, m_CreateLayerMask))
             {
-                var entry = m_EntityGlobalHandler.CreateEntity(m_EntityPalette[m_PaintIndex]);
+                var entry = m_SceneGlobalHandler.CreateEntity(m_EntityPrefabGlobalHandler.EntityDatas[m_PrefabIndex]);
                 entry.Instance.transform.position = hit.point;
             }
         }
@@ -102,15 +84,15 @@ public class CreateModeManager : MonoBehaviour
             GUILayout.Space(24);
 
             // Create Button
-            for (int i = 0; i < m_EntityPalette.Count; i++)
+            for (int i = 0; i < m_EntityPrefabGlobalHandler.EntityDatas.Count; i++)
             {
-                var entityData = m_EntityPalette[i];
+                var entityData = m_EntityPrefabGlobalHandler.EntityDatas[i];
 
                 using (new GUILayout.VerticalScope())
                 {
                     if (GUILayout.Button($"Choose {entityData.EntityName}"))
                     {
-                        m_PaintIndex = i;
+                        m_PrefabIndex = i;
                     }
                 }
             }
@@ -122,18 +104,18 @@ public class CreateModeManager : MonoBehaviour
             {
                 if (GUILayout.Button("New Scene"))
                 {
-                    m_EntityGlobalHandler.CreateNewScene();
+                    m_SceneGlobalHandler.CreateNewScene();
                 }
 
-                for (int i = 0; i < m_EntityGlobalHandler.EntityEntries.Count; i++)
+                for (int i = 0; i < m_SceneGlobalHandler.EntityEntries.Count; i++)
                 {
-                    var entry = m_EntityGlobalHandler.EntityEntries[i];
+                    var entry = m_SceneGlobalHandler.EntityEntries[i];
 
                     using (new GUILayout.HorizontalScope(new GUIStyle("box")))
                     {
                         if (GUILayout.Button("x"))
                         {
-                            m_EntityGlobalHandler.DeleteEntity(entry);
+                            m_SceneGlobalHandler.DeleteEntity(entry);
                             break;
                         }
 

@@ -4,10 +4,10 @@ using System.Collections.ObjectModel;
 using UnityEngine;
 
 /// <summary>
-/// Keep tracks of all the entity datas and their instances
+/// A Scene keeps tracks of all the entity datas and their instances
 /// </summary>
-[CreateAssetMenu(fileName = "Entity Global Handler", menuName = "Global Handler/Entity Global Handler")]
-public class EntityGlobalHandler : ScriptableObject, ISerializationCallbackReceiver
+[CreateAssetMenu(fileName = "Scene Global Handler", menuName = "Global Handler/Scene Global Handler")]
+public class SceneGlobalHandler : ScriptableObject, ISerializationCallbackReceiver
 {
     /// <summary>
     /// Keep tracks of entity data and instance

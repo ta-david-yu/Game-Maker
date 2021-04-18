@@ -13,6 +13,11 @@ public class BehaviourTypeSO : ScriptableObject
     private string m_BehaviourName;
 
     [SerializeField]
+    [Tooltip("An entity can only have one of this behaviour type instance")]
+    private bool m_IsUnique = true;
+    public bool IsUnique { get { return m_IsUnique; } }
+
+    [SerializeField]
     [Tooltip("The actual prefab with runtime logic")]
     private BehaviourInstanceBase m_BehaviourPrefab;
     public BehaviourInstanceBase BehaviourPrefab { get { return m_BehaviourPrefab; } }
@@ -28,7 +33,7 @@ public class BehaviourTypeSO : ScriptableObject
 
     #region Create mode
     /// <summary>
-    /// Used in create mode, add a behaviour to an entity
+    /// Used in create mode, add a behaviour to an entity instance
     /// </summary>
     public BehaviourInstanceBase AddBehaviourToEntity(EntityInstance entity)
     {
@@ -45,7 +50,7 @@ public class BehaviourTypeSO : ScriptableObject
     }
 
     /// <summary>
-    /// Used in create mode, remove a behaviour from an entity
+    /// Used in create mode, remove a behaviour from an entity instance
     /// </summary>
     public void RemoveBehaviourFromEntity(EntityInstance entity, BehaviourInstanceBase behaviour)
     {

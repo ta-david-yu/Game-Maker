@@ -758,42 +758,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c518cd0180b51a43984f923a7322be1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_EntityGlobalHandler: {fileID: 11400000, guid: 473e62d20640e3f4580573b14070205c, type: 2}
+  m_SceneGlobalHandler: {fileID: 11400000, guid: 473e62d20640e3f4580573b14070205c, type: 2}
+  m_EntityPrefabGlobalHandler: {fileID: 11400000, guid: b7d3e5a289a845447b729318bc33b68c, type: 2}
   m_BehaviourTypes:
   - {fileID: 11400000, guid: 779f4db01d3632a468e3162cfeb85df5, type: 2}
-  m_DefaultEntityDatas:
-  - EntityName: CubeEntity
-    EntitySO: {fileID: 11400000, guid: 87eeef4b677bc604e8800dd39607c5e3, type: 2}
-    BehaviourDatas:
-    - BehaviourSO: {fileID: 11400000, guid: 5c7d6d78b59c72c47b6bf46c5bcbc7f3, type: 2}
-      ParamDatas:
-      - BehaviourParamSO: {fileID: 11400000, guid: 91cf797018ba5be4f903971c8b2fff54, type: 2}
-        Value: Cube
-      - BehaviourParamSO: {fileID: 11400000, guid: ec843d55d52b0f246b58b96281fc94bf, type: 2}
-        Value: Yellow
-    - BehaviourSO: {fileID: 11400000, guid: 9bda79febcca7d1479cf828a984bdc24, type: 2}
-      ParamDatas:
-      - BehaviourParamSO: {fileID: 11400000, guid: fdcdb0ef65edbdc40a458aee09267f4d, type: 2}
-        Value: Box
-  - EntityName: SphereEntity
-    EntitySO: {fileID: 11400000, guid: 87eeef4b677bc604e8800dd39607c5e3, type: 2}
-    BehaviourDatas:
-    - BehaviourSO: {fileID: 11400000, guid: 5c7d6d78b59c72c47b6bf46c5bcbc7f3, type: 2}
-      ParamDatas:
-      - BehaviourParamSO: {fileID: 11400000, guid: 91cf797018ba5be4f903971c8b2fff54, type: 2}
-        Value: Sphere
-      - BehaviourParamSO: {fileID: 11400000, guid: ec843d55d52b0f246b58b96281fc94bf, type: 2}
-        Value: Blue
-    - BehaviourSO: {fileID: 11400000, guid: 9bda79febcca7d1479cf828a984bdc24, type: 2}
-      ParamDatas:
-      - BehaviourParamSO: {fileID: 11400000, guid: fdcdb0ef65edbdc40a458aee09267f4d, type: 2}
-        Value: Sphere
   m_Camera: {fileID: 295419608}
   m_EntityRoot: {fileID: 271956343}
-  m_Tool: 0
   m_SelectedEntityInstance: {fileID: 0}
-  m_PaintIndex: 0
-  m_LayerMask:
+  m_PrefabIndex: 0
+  m_CreateLayerMask:
     serializedVersion: 2
     m_Bits: 64
 --- !u!1 &2141373077
