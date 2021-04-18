@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17bea987d3fee0948a034d6442d1b65a, type: 3}
-  m_Name: Print Behaviour SO
+  m_Name: MeshBehaviourTypeSO
   m_EditorClassIdentifier: 
-  m_BehaviourName: Print
-  m_BehaviourPrefab: {fileID: 536160562168510317, guid: f0b5f5dd0d268eb4d99306abc60c1d84, type: 3}
+  m_BehaviourName: Mesh
+  m_BehaviourPrefab: {fileID: 1139155042334389504, guid: 4446885df2c8f8b4cb53330ccb972068, type: 3}
   m_Parameters:
-  - {fileID: 11400000, guid: 1bc426e16157f274aa8242cea6d37ea0, type: 2}
+  - {fileID: 11400000, guid: 91cf797018ba5be4f903971c8b2fff54, type: 2}

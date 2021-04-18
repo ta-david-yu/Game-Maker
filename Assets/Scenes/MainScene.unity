@@ -759,15 +759,31 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EntityGlobalHandler: {fileID: 11400000, guid: 473e62d20640e3f4580573b14070205c, type: 2}
-  m_EntitySOs:
+  m_EntityTypes:
   - {fileID: 11400000, guid: 01f5a03067970bc4da62be6cd833407c, type: 2}
   - {fileID: 11400000, guid: 23f19acfe57fe944aad4e0c02b53abec, type: 2}
-  m_BehaviourSOs:
+  m_BehaviourTypes:
   - {fileID: 11400000, guid: 779f4db01d3632a468e3162cfeb85df5, type: 2}
+  m_EntityDatsa:
+  - EntityName: CubeEntity
+    EntitySO: {fileID: 11400000, guid: 87eeef4b677bc604e8800dd39607c5e3, type: 2}
+    BehaviourDatas:
+    - BehaviourSO: {fileID: 11400000, guid: 5c7d6d78b59c72c47b6bf46c5bcbc7f3, type: 2}
+      ParamDatas:
+      - BehaviourParamSO: {fileID: 11400000, guid: 91cf797018ba5be4f903971c8b2fff54, type: 2}
+        Value: Cube
+  - EntityName: SphereEntity
+    EntitySO: {fileID: 11400000, guid: 87eeef4b677bc604e8800dd39607c5e3, type: 2}
+    BehaviourDatas:
+    - BehaviourSO: {fileID: 11400000, guid: 5c7d6d78b59c72c47b6bf46c5bcbc7f3, type: 2}
+      ParamDatas:
+      - BehaviourParamSO: {fileID: 11400000, guid: 91cf797018ba5be4f903971c8b2fff54, type: 2}
+        Value: Sphere
   m_Camera: {fileID: 295419608}
   m_EntityRoot: {fileID: 271956343}
   m_Tool: 0
   m_SelectedEntityInstance: {fileID: 0}
+  m_PaintIndex: 0
   m_LayerMask:
     serializedVersion: 2
     m_Bits: 64

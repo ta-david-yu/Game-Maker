@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 268503039f2143d47834376cad9cb316, type: 3}
-  m_Name: Cube Entity SO
+  m_Script: {fileID: 11500000, guid: 59498c697c30d764d80dcb08ab55a8db, type: 3}
+  m_Name: MeshBehaviourTypeSO Param - MeshType
   m_EditorClassIdentifier: 
-  m_EntityName: Cube
-  m_EntityPrefab: {fileID: 5833629407813562500, guid: 8f370050cb3dd18408f085fd63653be9, type: 3}
+  Name: MeshType
+  Type: 3
+  DefaultValue: Cube

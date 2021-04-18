@@ -19,11 +19,13 @@ public class CreateModeManager : MonoBehaviour
 
     [Header("Data")]
 
+    [UnityEngine.Serialization.FormerlySerializedAs("m_BehaviourSOs")]
     [SerializeField]
-    private List<EntityTypeSO> m_EntitySOs;
+    private List<BehaviourTypeSO> m_BehaviourTypes;
 
     [SerializeField]
-    private List<BehaviourTypeSO> m_BehaviourSOs;
+    [UnityEngine.Serialization.FormerlySerializedAs("m_EntityDatsa")]
+    private List<EntityData> m_DefaultEntityDatas;
 
     [Header("Reference")]
 
@@ -54,15 +56,18 @@ public class CreateModeManager : MonoBehaviour
         m_EntityGlobalHandler.CreateNewScene();
         m_EntityGlobalHandler.EntityRoot = m_EntityRoot;
 
-        for (int i = 0; i < m_EntitySOs.Count; i++)
+        m_EntityPalette.AddRange(m_DefaultEntityDatas);
+
+        /*
+        for (int i = 0; i < m_EntityTypes.Count; i++)
         {
-            var entitySO = m_EntitySOs[i];
+            var entitySO = m_EntityTypes[i];
             m_EntityPalette.Add(
                 new EntityData() { 
                     EntityName = entitySO.EntityDefaultName,
                     EntitySO = entitySO, 
                     BehaviourDatas = new List<BehaviourData>() });
-        }
+        }*/
     }
 
     private void OnDestroy()
@@ -103,7 +108,7 @@ public class CreateModeManager : MonoBehaviour
 
                 using (new GUILayout.VerticalScope())
                 {
-                    if (GUILayout.Button($"Choose {entityData.EntitySO.EntityDefaultName}"))
+                    if (GUILayout.Button($"Choose {entityData.EntityName}"))
                     {
                         m_PaintIndex = i;
                     }

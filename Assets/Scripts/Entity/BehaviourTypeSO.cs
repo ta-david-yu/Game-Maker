@@ -19,7 +19,7 @@ public class BehaviourTypeSO : ScriptableObject
 
     [SerializeField]
     [Tooltip("A list of parameters for this behaviour")]
-    private List<BehaviourParamSO> m_Parameters;
+    private List<BehaviourParamSO> m_Parameters = new List<BehaviourParamSO>();
     public ReadOnlyCollection<BehaviourParamSO> Parameters { get { return m_Parameters.AsReadOnly(); } }
 
     [System.NonSerialized]
