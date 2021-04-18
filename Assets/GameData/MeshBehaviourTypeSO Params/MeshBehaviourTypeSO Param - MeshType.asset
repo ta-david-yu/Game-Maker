@@ -15,3 +15,7 @@ MonoBehaviour:
   Name: MeshType
   Type: 3
   DefaultValue: Cube
+  IsEnum: 1
+  EnumValues:
+  - Cube
+  - Sphere

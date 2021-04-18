@@ -19,4 +19,7 @@ public class BehaviourParamSO : ScriptableObject
     public string Name;
     public ParamType Type;
     public string DefaultValue;
+
+    public bool IsEnum = false;
+    public List<string> EnumValues;
 }

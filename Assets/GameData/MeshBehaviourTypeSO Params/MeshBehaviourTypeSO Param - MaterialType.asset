@@ -15,3 +15,7 @@ MonoBehaviour:
   Name: MaterialType
   Type: 3
   DefaultValue: Yellow
+  IsEnum: 1
+  EnumValues:
+  - Yellow
+  - Blue

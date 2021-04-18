@@ -15,3 +15,7 @@ MonoBehaviour:
   Name: ColliderType
   Type: 3
   DefaultValue: Box
+  IsEnum: 1
+  EnumValues:
+  - Box
+  - Sphere
