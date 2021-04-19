@@ -16,26 +16,26 @@ MonoBehaviour:
   - EntityName: CubeEntity
     EntitySO: {fileID: 11400000, guid: 87eeef4b677bc604e8800dd39607c5e3, type: 2}
     BehaviourDatas:
+    - BehaviourSO: {fileID: 11400000, guid: 9bda79febcca7d1479cf828a984bdc24, type: 2}
+      ParamDatas:
+      - BehaviourParamSO: {fileID: 11400000, guid: fdcdb0ef65edbdc40a458aee09267f4d, type: 2}
+        Value: Box
     - BehaviourSO: {fileID: 11400000, guid: 5c7d6d78b59c72c47b6bf46c5bcbc7f3, type: 2}
       ParamDatas:
       - BehaviourParamSO: {fileID: 11400000, guid: 91cf797018ba5be4f903971c8b2fff54, type: 2}
         Value: Cube
       - BehaviourParamSO: {fileID: 11400000, guid: ec843d55d52b0f246b58b96281fc94bf, type: 2}
-        Value: Yellow
-    - BehaviourSO: {fileID: 11400000, guid: 9bda79febcca7d1479cf828a984bdc24, type: 2}
-      ParamDatas:
-      - BehaviourParamSO: {fileID: 11400000, guid: fdcdb0ef65edbdc40a458aee09267f4d, type: 2}
-        Value: Box
+        Value: Blue
   - EntityName: SphereEntity
     EntitySO: {fileID: 11400000, guid: 87eeef4b677bc604e8800dd39607c5e3, type: 2}
     BehaviourDatas:
+    - BehaviourSO: {fileID: 11400000, guid: 9bda79febcca7d1479cf828a984bdc24, type: 2}
+      ParamDatas:
+      - BehaviourParamSO: {fileID: 11400000, guid: fdcdb0ef65edbdc40a458aee09267f4d, type: 2}
+        Value: Sphere
     - BehaviourSO: {fileID: 11400000, guid: 5c7d6d78b59c72c47b6bf46c5bcbc7f3, type: 2}
       ParamDatas:
       - BehaviourParamSO: {fileID: 11400000, guid: 91cf797018ba5be4f903971c8b2fff54, type: 2}
         Value: Sphere
       - BehaviourParamSO: {fileID: 11400000, guid: ec843d55d52b0f246b58b96281fc94bf, type: 2}
-        Value: Blue
-    - BehaviourSO: {fileID: 11400000, guid: 9bda79febcca7d1479cf828a984bdc24, type: 2}
-      ParamDatas:
-      - BehaviourParamSO: {fileID: 11400000, guid: fdcdb0ef65edbdc40a458aee09267f4d, type: 2}
-        Value: Sphere
+        Value: Yellow

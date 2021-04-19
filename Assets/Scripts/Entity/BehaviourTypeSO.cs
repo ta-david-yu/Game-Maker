@@ -11,6 +11,7 @@ public class BehaviourTypeSO : ScriptableObject
 {
     [SerializeField]
     private string m_BehaviourName;
+    public string BehaviourName { get { return m_BehaviourName; } }
 
     [SerializeField]
     [Tooltip("An entity can only have one of this behaviour type instance")]

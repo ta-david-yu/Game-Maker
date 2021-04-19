@@ -34,6 +34,7 @@ public class SceneGlobalHandler : ScriptableObject, ISerializationCallbackReceiv
     {
         m_EntityEntries = new List<EntityEntry>();
         m_EntityEntryLookUpTable = new Dictionary<int, EntityEntry>();
+        EntityIDCounter = 0;
     }
 
     public void OnBeforeSerialize()
@@ -61,7 +62,7 @@ public class SceneGlobalHandler : ScriptableObject, ISerializationCallbackReceiv
             // Remove behaviour from the entity instance and the behaviourSO
             for (int j = 0; j < entityInstance.Behaviours.Count; j++)
             {
-                var behaviourInstance = entityInstance.Behaviours[i];
+                var behaviourInstance = entityInstance.Behaviours[j];
                 behaviourInstance.BehaviourSO.RemoveBehaviourFromEntity(entityInstance, behaviourInstance);
             }
 
@@ -108,13 +109,14 @@ public class SceneGlobalHandler : ScriptableObject, ISerializationCallbackReceiv
     /// </summary>
     /// <param name="data">The data used to create an entity</param>
     /// <returns></returns>
-    public EntityEntry CreateEntity(EntityData data)
+    public EntityEntry CreateEntity(EntityData fromData)
     {
         int id = EntityIDCounter;
 
+        EntityData data = fromData.Clone();
+
         // Create new entity instance
         EntityInstance newInstance = Instantiate(data.EntitySO.EntityPrefab, EntityRoot);
-        newInstance.gameObject.name = data.EntityName;
 
         // Attach behaviours and setup parameters
         for (int i = 0; i < data.BehaviourDatas.Count; i++)
