@@ -10,6 +10,16 @@ public class PlayModeManager : MonoBehaviour
     [SerializeField]
     private BehaviourCollectionSO m_BehaviourCollection;
 
+    [Header("Reference")]
+
+    [SerializeField]
+    private Camera m_Camera;
+
+    [Header("Settings")]
+
+    [SerializeField]
+    private LayerMask m_ClickLayerMask;
+
     private List<BehaviourTypeSO> m_RuntimeBehaviourTypes;
 
     private bool m_IsPlaying = false;
@@ -17,6 +27,7 @@ public class PlayModeManager : MonoBehaviour
 
     public void EnterPlayMode()
     {
+        m_IsPlaying = true;
         m_RuntimeBehaviourTypes = new List<BehaviourTypeSO>();
 
         for (int i = 0; i < m_BehaviourCollection.BehaviourTypes.Count; i++)
@@ -32,6 +43,7 @@ public class PlayModeManager : MonoBehaviour
 
     public void ExitPlayMode()
     {
+        m_IsPlaying = false;
         for (int i = 0; i < m_RuntimeBehaviourTypes.Count; i++)
         {
             var type = m_RuntimeBehaviourTypes[i];
@@ -45,10 +57,30 @@ public class PlayModeManager : MonoBehaviour
         {
             float timeStep = Time.deltaTime;
 
+            // update behaviours
             for (int i = 0; i < m_RuntimeBehaviourTypes.Count; i++)
             {
                 var type = m_RuntimeBehaviourTypes[i];
                 type.UpdateBehaviours(timeStep);
+            }
+
+            // click event
+            if (Input.GetMouseButtonDown(0))
+            {
+                var ray = m_Camera.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity, m_ClickLayerMask))
+                {
+                    EntityInstance entity;
+                    if (hit.collider.TryGetComponent(out entity))
+                    {
+                        for (int i = 0; i < entity.Behaviours.Count; i++)
+                        {
+                            var behaviour = entity.Behaviours[i];
+                            behaviour.OnClick();
+                        }
+                    }
+                }
             }
         }
     }

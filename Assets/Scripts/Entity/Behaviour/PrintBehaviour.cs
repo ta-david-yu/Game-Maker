@@ -4,9 +4,22 @@ using UnityEngine;
 
 public class PrintBehaviour : BehaviourInstanceBase
 {
+    [SerializeField]
+    private BehaviourParamSO m_MessageParamSO;
+
+    private string m_Message;
+
+    public override void UpdateParameter(BehaviourData.BehaviourParamData parameterData)
+    {
+        if (parameterData.BehaviourParamSO.GetInstanceID() == m_MessageParamSO.GetInstanceID())
+        {
+            m_Message = parameterData.Value;
+        }
+    }
+
     public override void OnClick()
     {
-        Debug.Log($"Click on {Entity}");
+        Debug.Log($"Message: {m_Message}");
     }
 
     public override void OnUpdate(float timeStep)

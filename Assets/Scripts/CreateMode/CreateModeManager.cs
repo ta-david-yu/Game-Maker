@@ -25,6 +25,9 @@ public class CreateModeManager : MonoBehaviour
     [Header("Reference")]
 
     [SerializeField]
+    private PlayModeManager m_PlayModeManager;
+
+    [SerializeField]
     private List<CreateModeToolBase> m_Tools;
 
     [SerializeField]
@@ -53,6 +56,7 @@ public class CreateModeManager : MonoBehaviour
 
     private void Update()
     {
+        if (!m_PlayModeManager.IsPlaying)
         if (Input.GetMouseButtonDown(0))
         {
             var ray = m_Camera.ScreenPointToRay(Input.mousePosition);
@@ -64,6 +68,22 @@ public class CreateModeManager : MonoBehaviour
     {
         using (new GUILayout.VerticalScope(new GUIStyle("box"), GUILayout.Width(240)))
         {
+            // Play Mode
+            if (m_PlayModeManager.IsPlaying)
+            {
+                if (GUILayout.Button("Stop"))
+                {
+                    m_PlayModeManager.ExitPlayMode();
+                }
+            }
+            else
+            {
+                if (GUILayout.Button("Play"))
+                {
+                    m_PlayModeManager.EnterPlayMode();
+                }
+            }
+
             // Tools
             using (new GUILayout.VerticalScope(new GUIStyle("box")))
             {
