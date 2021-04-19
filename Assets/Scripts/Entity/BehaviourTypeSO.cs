@@ -92,10 +92,6 @@ public class BehaviourTypeSO : ScriptableObject
 
     #region Play mode
 
-    public void OnEnterPlayMode()
-    {
-    }
-
     /// <summary>
     /// Play mode update
     /// </summary>
@@ -107,11 +103,6 @@ public class BehaviourTypeSO : ScriptableObject
             var behaviour = RuntimeBehaviours[i];
             behaviour.OnUpdate(timeStep);
         }
-    }
-
-    public void OnExitPlayMode()
-    {
-        // TODO: reset state
     }
 
     #endregion

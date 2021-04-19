@@ -66,7 +66,7 @@ public class SelectionTool : CreateModeToolBase
                             {
                                 m_SelectedEntityInstance = null;
                             }
-                            m_SceneGlobalHandler.DeleteEntity(entry);
+                            m_SceneGlobalHandler.DeleteEntityEntry(entry);
                             break;
                         }
 

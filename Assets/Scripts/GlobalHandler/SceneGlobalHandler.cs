@@ -86,7 +86,6 @@ public class SceneGlobalHandler : ScriptableObject, ISerializationCallbackReceiv
             }
 
             // Delete entity instance
-            // TODO: recycle to an object pool
             Destroy(entityInstance.gameObject);
         }
 
@@ -160,12 +159,12 @@ public class SceneGlobalHandler : ScriptableObject, ISerializationCallbackReceiv
     /// Remove an entity
     /// </summary>
     /// <param name="entry"></param>
-    public void DeleteEntity(EntityEntry entry)
+    public void DeleteEntityEntry(EntityEntry entry)
     {
-        DeleteEntity(entry.Instance);
+        DeleteEntityEntry(entry.Instance);
     }
 
-    public void DeleteEntity(EntityInstance entityInstance)
+    public void DeleteEntityEntry(EntityInstance entityInstance)
     {
         // Deregister from the list
         for (int i = 0; i < EntityEntries.Count; i++)
@@ -187,7 +186,6 @@ public class SceneGlobalHandler : ScriptableObject, ISerializationCallbackReceiv
         }
 
         // Delete entity instance
-        // TODO: recycle to an object pool
         Destroy(entityInstance.gameObject);
     }
 }

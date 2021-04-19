@@ -36,7 +36,6 @@ public class PlayModeManager : MonoBehaviour
             if (type.RuntimeBehaviours.Count > 0)
             {
                 m_RuntimeBehaviourTypes.Add(type);
-                type.OnEnterPlayMode();
             }
         }
     }
@@ -47,11 +46,10 @@ public class PlayModeManager : MonoBehaviour
         for (int i = 0; i < m_RuntimeBehaviourTypes.Count; i++)
         {
             var type = m_RuntimeBehaviourTypes[i];
-            type.OnExitPlayMode();
         }
     }
 
-    private void Update()
+    public void Update()
     {
         if (IsPlaying)
         {
