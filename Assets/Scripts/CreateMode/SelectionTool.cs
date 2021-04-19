@@ -46,6 +46,7 @@ public class SelectionTool : CreateModeToolBase
             if (GUILayout.Button("New Scene"))
             {
                 m_SceneGlobalHandler.CreateNewScene();
+                m_SelectedEntityInstance = null;
             }
 
             // Entity Hierarchy
@@ -140,7 +141,25 @@ public class SelectionTool : CreateModeToolBase
                                     }
                                     else
                                     {
-                                        string newValue = GUILayout.TextArea(paramData.Value);
+                                        string newValue = paramData.Value;
+
+                                        switch (paramType.Type)
+                                        {
+                                            case BehaviourParamSO.ParamType.Integer:
+                                                newValue = GUILayout.TextArea(paramData.Value);
+                                                break;
+                                            case BehaviourParamSO.ParamType.Float:
+                                                newValue = GUILayout.TextArea(paramData.Value);
+                                                break;
+                                            case BehaviourParamSO.ParamType.Bool:
+                                                bool oldBoolValue = bool.Parse(paramData.Value); 
+                                                bool newBoolValue = GUILayout.Toggle(oldBoolValue, "");
+                                                newValue = newBoolValue.ToString();
+                                                break;
+                                            case BehaviourParamSO.ParamType.String:
+                                                newValue = GUILayout.TextArea(paramData.Value);
+                                                break;
+                                        }
 
                                         // Changed parameter value, update instance's parameter
                                         if (newValue != paramData.Value)
@@ -155,7 +174,7 @@ public class SelectionTool : CreateModeToolBase
                                         }
                                     }
                                 }
-                            }   
+                            }
                         }
                     }
 
