@@ -17,6 +17,17 @@ public class SceneGlobalHandler : ScriptableObject, ISerializationCallbackReceiv
     {
         public EntityData Data;
         public EntityInstance Instance;
+
+        public BehaviourInstanceBase AddBehaviour(BehaviourTypeSO behaviourType)
+        {
+            var behaviourData = behaviourType.CreateDefaultBehaviourData();
+            Data.BehaviourDatas.Add(behaviourData);
+
+            var behaviourInstance = behaviourData.BehaviourSO.AddBehaviourToEntity(Instance);
+            behaviourInstance.UpdateAllParameters(behaviourData.ParamDatas);
+
+            return behaviourInstance;
+        }
     }
 
     public int EntityIDCounter { get; private set; } = 0;

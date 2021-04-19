@@ -10,6 +10,12 @@ public class SelectionTool : CreateModeToolBase
     [SerializeField]
     private SceneGlobalHandler m_SceneGlobalHandler;
 
+    [SerializeField]
+    private EntityPrefabGlobalHandler m_EntityPrefabGlobalHandler;
+
+    [SerializeField]
+    private BehaviourCollectionSO m_BehaviourCollection;
+
     [Header("Settings")]
 
     [SerializeField]
@@ -24,6 +30,7 @@ public class SelectionTool : CreateModeToolBase
     private EntityInstance m_SelectedEntityInstance;
 
     private Vector2 m_SceneHierarchyScrollPos;
+    private bool m_IsAddBehaviourListOn = false;
 
     public override void OnClick(Ray ray)
     {
@@ -54,6 +61,10 @@ public class SelectionTool : CreateModeToolBase
                     {
                         if (GUILayout.Button("x"))
                         {
+                            if (entry.Instance.GetInstanceID() == m_SelectedEntityInstance.GetInstanceID())
+                            {
+                                m_SelectedEntityInstance = null;
+                            }
                             m_SceneGlobalHandler.DeleteEntity(entry);
                             break;
                         }
@@ -72,14 +83,15 @@ public class SelectionTool : CreateModeToolBase
             // Entity Inspector
             if (m_SelectedEntityInstance)
             {
+                var entry = m_SceneGlobalHandler.GetEntityEntry(m_SelectedEntityInstance.ID);
+
                 using (new GUILayout.VerticalScope(new GUIStyle("box")))
                 {
-                    var entry = m_SceneGlobalHandler.GetEntityEntry(m_SelectedEntityInstance.ID);
-
+                    // Basic Entity Info
                     using (new GUILayout.HorizontalScope())
                     {
                         GUILayout.Label("ID", GUILayout.Width(m_InspectorFieldNameWidth));
-                        GUILayout.Label(entry.Instance.ID.ToString());
+                        GUILayout.Label(m_SelectedEntityInstance.ID.ToString());
                     }
 
                     using (new GUILayout.HorizontalScope())
@@ -88,6 +100,7 @@ public class SelectionTool : CreateModeToolBase
                         entry.Data.EntityName = GUILayout.TextField(entry.Data.EntityName);
                     }
 
+                    // Behaviours
                     for (int i = 0; i < entry.Data.BehaviourDatas.Count; i++)
                     {
                         using (new GUILayout.VerticalScope(new GUIStyle("box")))
@@ -112,7 +125,7 @@ public class SelectionTool : CreateModeToolBase
 
                                         int newEnumIndex = GUILayout.Toolbar(enumIndex, paramType.EnumValues.ToArray());
 
-                                        // Change parameter value, update instance's parameter
+                                        // Changed parameter value, update instance's parameter
                                         if (newEnumIndex != enumIndex)
                                         {
                                             var newParamData = new BehaviourData.BehaviourParamData()
@@ -127,11 +140,49 @@ public class SelectionTool : CreateModeToolBase
                                     }
                                     else
                                     {
-                                        
+                                        string newValue = GUILayout.TextArea(paramData.Value);
+
+                                        // Changed parameter value, update instance's parameter
+                                        if (newValue != paramData.Value)
+                                        {
+                                            var newParamData = new BehaviourData.BehaviourParamData()
+                                            {
+                                                BehaviourParamSO = paramType,
+                                                Value = newValue
+                                            };
+                                            behaviourData.ParamDatas[dataIndex] = newParamData;
+                                            behaviourInstance.UpdateParameter(newParamData);
+                                        }
+                                    }
+                                }
+                            }   
+                        }
+                    }
+
+                    // Add Behaviours
+                    m_IsAddBehaviourListOn = GUILayout.Toggle(m_IsAddBehaviourListOn, "Add Behaviour");
+                    if (m_IsAddBehaviourListOn)
+                    {
+                        using (new GUILayout.VerticalScope(new GUIStyle("box")))
+                        {
+                            for (int i = 0; i < m_BehaviourCollection.BehaviourTypes.Count; i++)
+                            {
+                                var behaviourType = m_BehaviourCollection.BehaviourTypes[i];
+                                if (!(behaviourType.IsUnique && entry.Instance.HasBehaviour(behaviourType)))
+                                { 
+                                    if (GUILayout.Button($"Add {behaviourType.BehaviourName} Behaviour"))
+                                    {
+                                        entry.AddBehaviour(behaviourType);
                                     }
                                 }
                             }
                         }
+                    }
+
+                    // Save as Prefab
+                    if (GUILayout.Button("Save as Prefab"))
+                    {
+                        m_EntityPrefabGlobalHandler.SavePrefab(entry.Data.Clone());
                     }
                 }
             }

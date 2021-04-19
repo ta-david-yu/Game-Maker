@@ -342,6 +342,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_SceneGlobalHandler: {fileID: 11400000, guid: 473e62d20640e3f4580573b14070205c, type: 2}
+  m_EntityPrefabGlobalHandler: {fileID: 11400000, guid: b7d3e5a289a845447b729318bc33b68c, type: 2}
+  m_BehaviourCollection: {fileID: 11400000, guid: ef1d10a3099c0f5499e574e75a1cc689, type: 2}
   m_SceneHierarchyWindowHeight: 200
   m_InspectorFieldNameWidth: 80
   m_SelectedEntityInstance: {fileID: 0}

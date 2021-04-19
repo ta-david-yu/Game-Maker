@@ -15,7 +15,7 @@ public class BehaviourTypeSO : ScriptableObject
 
     [SerializeField]
     [Tooltip("An entity can only have one of this behaviour type instance")]
-    private bool m_IsUnique = true;
+    private bool m_IsUnique = false;
     public bool IsUnique { get { return m_IsUnique; } }
 
     [SerializeField]
@@ -31,6 +31,31 @@ public class BehaviourTypeSO : ScriptableObject
     [System.NonSerialized]
     private List<BehaviourInstanceBase> m_RuntimeBehaviours = new List<BehaviourInstanceBase>();
     public ReadOnlyCollection<BehaviourInstanceBase> RuntimeBehaviours { get { return m_RuntimeBehaviours.AsReadOnly(); } }
+
+    /// <summary>
+    /// Create behaviour data of this type with default values
+    /// </summary>
+    /// <returns></returns>
+    public BehaviourData CreateDefaultBehaviourData()
+    {
+        var data = new BehaviourData()
+        {
+            BehaviourSO = this,
+            ParamDatas = new List<BehaviourData.BehaviourParamData>()
+        };
+
+        for (int i = 0; i < Parameters.Count; i++)
+        {
+            var paramType = Parameters[i];
+            data.ParamDatas.Add(new BehaviourData.BehaviourParamData()
+            {
+                BehaviourParamSO = paramType,
+                Value = paramType.DefaultValue
+            });
+        }
+
+        return data;
+    }
 
     #region Create mode
     /// <summary>
