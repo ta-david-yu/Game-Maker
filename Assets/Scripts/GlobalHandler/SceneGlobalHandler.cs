@@ -28,6 +28,14 @@ public class SceneGlobalHandler : ScriptableObject, ISerializationCallbackReceiv
 
             return behaviourInstance;
         }
+
+        public void RemoveBehaviourAt(int index)
+        {
+            var type = Data.BehaviourDatas[index].BehaviourSO;
+            type.RemoveBehaviourFromEntity(this.Instance, this.Instance.Behaviours[index]);
+
+            Data.BehaviourDatas.RemoveAt(index);
+        }
     }
 
     public int EntityIDCounter { get; private set; } = 0;

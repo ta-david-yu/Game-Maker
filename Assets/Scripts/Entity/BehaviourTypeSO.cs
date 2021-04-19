@@ -94,7 +94,6 @@ public class BehaviourTypeSO : ScriptableObject
 
     public void OnEnterPlayMode()
     {
-        // TODO: serialization, reset state
     }
 
     /// <summary>

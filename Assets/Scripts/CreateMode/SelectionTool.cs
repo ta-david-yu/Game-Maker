@@ -60,7 +60,7 @@ public class SelectionTool : CreateModeToolBase
 
                     using (new GUILayout.HorizontalScope(new GUIStyle("box")))
                     {
-                        if (GUILayout.Button("x"))
+                        if (GUILayout.Button("x", GUILayout.Width(25)))
                         {
                             if (entry.Instance.GetInstanceID() == m_SelectedEntityInstance.GetInstanceID())
                             {
@@ -108,7 +108,16 @@ public class SelectionTool : CreateModeToolBase
                         {
                             var behaviourData = entry.Data.BehaviourDatas[i];
                             var behaviourInstance = entry.Instance.Behaviours[i];
-                            GUILayout.Label(behaviourData.BehaviourSO.BehaviourName);
+
+                            using (new GUILayout.HorizontalScope())
+                            {
+                                if (GUILayout.Button("x", GUILayout.Width(25)))
+                                {
+                                    entry.RemoveBehaviourAt(i);
+                                    break;
+                                }
+                                GUILayout.Label(behaviourData.BehaviourSO.BehaviourName);
+                            }
 
                             for (int j = 0; j < behaviourData.BehaviourSO.Parameters.Count; j++)
                             {
