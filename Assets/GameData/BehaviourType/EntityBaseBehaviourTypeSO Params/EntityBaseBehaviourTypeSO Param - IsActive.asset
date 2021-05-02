@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 268503039f2143d47834376cad9cb316, type: 3}
-  m_Name: EmptyEntitySO
+  m_Script: {fileID: 11500000, guid: 59498c697c30d764d80dcb08ab55a8db, type: 3}
+  m_Name: EntityBaseBehaviourTypeSO Param - IsActive
   m_EditorClassIdentifier: 
-  m_EntityDefaultName: Entity
-  m_EntityPrefab: {fileID: 6810776663234373277, guid: b53fea394823d1148bbb444e7aa20faf, type: 3}
+  Name: IsActive
+  Type: 2
+  DefaultValue: true
+  IsEnum: 0
+  EnumValues: []

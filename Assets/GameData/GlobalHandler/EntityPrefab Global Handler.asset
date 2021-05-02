@@ -16,6 +16,10 @@ MonoBehaviour:
   - EntityName: Basic Cube
     EntitySO: {fileID: 11400000, guid: 87eeef4b677bc604e8800dd39607c5e3, type: 2}
     BehaviourDatas:
+    - BehaviourSO: {fileID: 11400000, guid: 338a7d5f2ab983a409b618e4cf12ba2c, type: 2}
+      ParamDatas:
+      - BehaviourParamSO: {fileID: 11400000, guid: 1e67bd9e2eb724848a68ff860cf1f16f, type: 2}
+        Value: true
     - BehaviourSO: {fileID: 11400000, guid: 9bda79febcca7d1479cf828a984bdc24, type: 2}
       ParamDatas:
       - BehaviourParamSO: {fileID: 11400000, guid: fdcdb0ef65edbdc40a458aee09267f4d, type: 2}
@@ -29,6 +33,10 @@ MonoBehaviour:
   - EntityName: Basic Sphere
     EntitySO: {fileID: 11400000, guid: 87eeef4b677bc604e8800dd39607c5e3, type: 2}
     BehaviourDatas:
+    - BehaviourSO: {fileID: 11400000, guid: 338a7d5f2ab983a409b618e4cf12ba2c, type: 2}
+      ParamDatas:
+      - BehaviourParamSO: {fileID: 11400000, guid: 1e67bd9e2eb724848a68ff860cf1f16f, type: 2}
+        Value: true
     - BehaviourSO: {fileID: 11400000, guid: 9bda79febcca7d1479cf828a984bdc24, type: 2}
       ParamDatas:
       - BehaviourParamSO: {fileID: 11400000, guid: fdcdb0ef65edbdc40a458aee09267f4d, type: 2}

@@ -65,6 +65,11 @@ public abstract class BehaviourInstanceBase : MonoBehaviour
     protected virtual void onDetached(EntityInstance entity) { }
 
     /// <summary>
+    /// Called when entering/exiting playmode
+    /// </summary>
+    public virtual void OnReload() { }
+
+    /// <summary>
     /// Used in play mode
     /// </summary>
     /// <param name="timeStep"></param>

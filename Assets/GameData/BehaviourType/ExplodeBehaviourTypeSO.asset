@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 17bea987d3fee0948a034d6442d1b65a, type: 3}
-  m_Name: AddPointBehaviourTypeSO
+  m_Name: ExplodeBehaviourTypeSO
   m_EditorClassIdentifier: 
-  m_BehaviourName: AddPoint
+  m_BehaviourName: Explode
   m_IsUnique: 0
-  m_BehaviourPrefab: {fileID: 4378283090001582434, guid: 4b6fa0004dcf40345b54724197950f3c, type: 3}
+  m_BehaviourPrefab: {fileID: -6883699823700234362, guid: 673fcd24bac899645be263467f34532f, type: 3}
   m_Parameters:
-  - {fileID: 11400000, guid: b3046828eddf9ed45af73aded44fcd2c, type: 2}
+  - {fileID: 11400000, guid: 6d60168ee9efefc458ed896d6e90028b, type: 2}
+  - {fileID: 11400000, guid: e5d64ee4878ddf344923a2b7c85bdabc, type: 2}

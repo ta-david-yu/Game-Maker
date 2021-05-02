@@ -30,6 +30,13 @@ public class BehaviourUpdateSystem : GameLoopSystemBase, ISerializationCallbackR
         {
             var type = m_BehaviourCollection.BehaviourTypes[i];
 
+            // Reload Behaviours
+            for (int j = 0; j < type.RuntimeBehaviours.Count; j++)
+            {
+                var behaviourInstance = type.RuntimeBehaviours[j];
+                behaviourInstance.OnReload();
+            }
+
             // Only types with more than one behaviour instance are registered into playmode
             if (type.RuntimeBehaviours.Count > 0)
             {
@@ -50,6 +57,18 @@ public class BehaviourUpdateSystem : GameLoopSystemBase, ISerializationCallbackR
 
     public override void ExitPlayMode()
     {
+        // Reload behaviours
+        for (int i = 0; i < m_BehaviourCollection.BehaviourTypes.Count; i++)
+        {
+            var type = m_BehaviourCollection.BehaviourTypes[i];
+
+            for (int j = 0; j < type.RuntimeBehaviours.Count; j++)
+            {
+                var behaviourInstance = type.RuntimeBehaviours[j];
+                behaviourInstance.OnReload();
+            }
+        }
+
         // Reset behaviours' parameters
         for (int i = 0; i < m_SceneGlobalHandler.EntityEntries.Count; i++)
         {

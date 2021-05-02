@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AddPointBehaviour : BehaviourInstanceBase, IClickable
+public class AddPointsBehaviour : BehaviourInstanceBase, IClickable
 {
     [SerializeField]
     private GameScoreGlobalHandler m_GameScoreGlobalHandler;
@@ -18,8 +18,7 @@ public class AddPointBehaviour : BehaviourInstanceBase, IClickable
         {
             if (!int.TryParse(parameterData.Value, out m_PointValue))
             {
-                m_PointValue = 0;
-                Debug.LogError($"Cannot convert paramter.Value {parameterData.Value} to an integer");
+                // TODO: Error, type parsing should be done in the parameter interface
             }
         }
     }
@@ -31,5 +30,6 @@ public class AddPointBehaviour : BehaviourInstanceBase, IClickable
     public void OnClick()
     {
         m_GameScoreGlobalHandler.Score += m_PointValue;
+        m_Entity.gameObject.SetActive(false);
     }
 }
