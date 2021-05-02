@@ -7,7 +7,7 @@ using UnityEngine;
 /// SO holding behaviour information
 /// </summary>
 [CreateAssetMenu(fileName = "BehaviourType SO", menuName = "Game Data/BehaviourType SO")]
-public class BehaviourTypeSO : ScriptableObject
+public class BehaviourTypeSO : ScriptableObject, ISerializationCallbackReceiver
 {
     [SerializeField]
     private string m_BehaviourName;
@@ -28,7 +28,7 @@ public class BehaviourTypeSO : ScriptableObject
     private List<BehaviourParamSO> m_Parameters = new List<BehaviourParamSO>();
     public ReadOnlyCollection<BehaviourParamSO> Parameters { get { return m_Parameters.AsReadOnly(); } }
 
-    [System.NonSerialized]
+    [NonReorderable]
     private List<BehaviourInstanceBase> m_RuntimeBehaviours = new List<BehaviourInstanceBase>();
     public ReadOnlyCollection<BehaviourInstanceBase> RuntimeBehaviours { get { return m_RuntimeBehaviours.AsReadOnly(); } }
 
@@ -103,6 +103,15 @@ public class BehaviourTypeSO : ScriptableObject
             var behaviour = RuntimeBehaviours[i];
             behaviour.OnUpdate(timeStep);
         }
+    }
+
+    public void OnBeforeSerialize()
+    {
+    }
+
+    public void OnAfterDeserialize()
+    {
+        m_RuntimeBehaviours = new List<BehaviourInstanceBase>();
     }
 
     #endregion

@@ -79,7 +79,7 @@ public class SceneGlobalHandler : ScriptableObject, ISerializationCallbackReceiv
             var entityInstance = EntityEntries[i].Instance;
 
             // Remove behaviour from the entity instance and the behaviourSO
-            for (int j = 0; j < entityInstance.Behaviours.Count; j++)
+            for (int j = entityInstance.Behaviours.Count - 1; j >= 0; j--)
             {
                 var behaviourInstance = entityInstance.Behaviours[j];
                 behaviourInstance.BehaviourSO.RemoveBehaviourFromEntity(entityInstance, behaviourInstance);
@@ -166,6 +166,13 @@ public class SceneGlobalHandler : ScriptableObject, ISerializationCallbackReceiv
 
     public void DeleteEntityEntry(EntityInstance entityInstance)
     {
+        // Remove behaviour from the entity instance and the behaviourSO
+        for (int i = entityInstance.Behaviours.Count - 1; i >= 0; i--)
+        {
+            var behaviourInstance = entityInstance.Behaviours[i];
+            behaviourInstance.BehaviourSO.RemoveBehaviourFromEntity(entityInstance, behaviourInstance);
+        }
+
         // Deregister from the list
         for (int i = 0; i < EntityEntries.Count; i++)
         {
@@ -176,13 +183,6 @@ public class SceneGlobalHandler : ScriptableObject, ISerializationCallbackReceiv
                 m_EntityEntryLookUpTable.Remove(entry.Instance.ID);
                 break;
             }
-        }
-
-        // Remove behaviour from the entity instance and the behaviourSO
-        for (int i = 0; i < entityInstance.Behaviours.Count; i++)
-        {
-            var behaviourInstance = entityInstance.Behaviours[i];
-            behaviourInstance.BehaviourSO.RemoveBehaviourFromEntity(entityInstance, behaviourInstance);
         }
 
         // Delete entity instance
