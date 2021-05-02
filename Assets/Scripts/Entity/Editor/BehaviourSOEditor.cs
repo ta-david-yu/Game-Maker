@@ -30,7 +30,16 @@ public class BehaviourSOEditor : Editor
         {
             m_NewParamName = EditorGUILayout.TextField(m_NewParamName);
 
-            string parentFolderName = $"{Path.GetDirectoryName(AssetDatabase.GetAssetPath(m_BehaviourSO))}";
+            string parentFolderName = "";
+            try
+            {
+                parentFolderName = $"{Path.GetDirectoryName(AssetDatabase.GetAssetPath(m_BehaviourSO))}";
+            }
+            catch
+            {
+                return;
+            }
+
             string subFolderName = $"{m_BehaviourSO.name} Params";
 
             string paramFolderPath =

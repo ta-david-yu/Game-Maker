@@ -20,10 +20,14 @@ public class CreateModeManager : MonoBehaviour
     [SerializeField]
     private CameraGlobalHandler m_CameraHandler;
 
+    [SerializeField]
+    private GameScoreGlobalHandler m_GameScoreGlobalHandler;
+
     [Header("Reference")]
 
     [SerializeField]
-    private PlayModeManager m_PlayModeManager;
+    [UnityEngine.Serialization.FormerlySerializedAs("m_PlayModeManager")]
+    private PlayModeUpdater m_PlayModeUpdater;
 
     [SerializeField]
     private List<CreateModeToolBase> m_Tools;
@@ -51,7 +55,7 @@ public class CreateModeManager : MonoBehaviour
 
     private void Update()
     {
-        if (!m_PlayModeManager.IsPlaying)
+        if (!m_PlayModeUpdater.IsPlaying)
             if (Input.GetMouseButtonDown(0))
             {
                 var ray = m_CameraHandler.Camera.ScreenPointToRay(Input.mousePosition);
@@ -64,18 +68,25 @@ public class CreateModeManager : MonoBehaviour
         using (new GUILayout.VerticalScope(new GUIStyle("box"), GUILayout.Width(240)))
         {
             // Play Mode
-            if (m_PlayModeManager.IsPlaying)
+            if (m_PlayModeUpdater.IsPlaying)
             {
                 if (GUILayout.Button("Stop"))
                 {
-                    m_PlayModeManager.ExitPlayMode();
+                    m_PlayModeUpdater.ExitPlayMode();
+                }
+
+                // Game Score Info
+                using (new GUILayout.HorizontalScope())
+                {
+                    GUILayout.Label("Score", GUILayout.Width(80));
+                    GUILayout.Label(m_GameScoreGlobalHandler.Score.ToString());
                 }
             }
             else
             {
                 if (GUILayout.Button("Play"))
                 {
-                    m_PlayModeManager.EnterPlayMode();
+                    m_PlayModeUpdater.EnterPlayMode();
                     return;
                 }
 

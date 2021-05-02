@@ -73,12 +73,4 @@ public class MeshBehaviour : BehaviourInstanceBase
     public override void OnUpdate(float timeStep)
     {
     }
-
-    protected override void onAttached(EntityInstance entity)
-    {
-    }
-
-    protected override void onDetached(EntityInstance entity)
-    {
-    }
 }

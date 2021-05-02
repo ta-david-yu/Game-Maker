@@ -38,7 +38,7 @@ public abstract class BehaviourInstanceBase : MonoBehaviour
     /// Update a parameter
     /// </summary>
     /// <param name="parameter"></param>
-    public virtual void UpdateParameter(BehaviourData.BehaviourParamData parameterData) { }
+    public abstract void UpdateParameter(BehaviourData.BehaviourParamData parameterData);
 
     /// <summary>
     /// Used in create mode, called when attached to an entity
@@ -60,9 +60,9 @@ public abstract class BehaviourInstanceBase : MonoBehaviour
         m_Entity = null;
     }
 
-    protected abstract void onAttached(EntityInstance entity);
+    protected virtual void onAttached(EntityInstance entity) { }
 
-    protected abstract void onDetached(EntityInstance entity);
+    protected virtual void onDetached(EntityInstance entity) { }
 
     /// <summary>
     /// Used in play mode

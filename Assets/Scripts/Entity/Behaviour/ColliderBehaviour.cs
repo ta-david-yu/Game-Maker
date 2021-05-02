@@ -33,10 +33,6 @@ public class ColliderBehaviour : BehaviourInstanceBase
     {
     }
 
-    protected override void onAttached(EntityInstance entity)
-    {
-    }
-
     protected override void onDetached(EntityInstance entity)
     {
         // Remove collider from the entity

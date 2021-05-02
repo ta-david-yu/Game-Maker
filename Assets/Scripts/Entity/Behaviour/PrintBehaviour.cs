@@ -26,14 +26,4 @@ public class PrintBehaviour : BehaviourInstanceBase, IClickable
     {
         // Do nothing
     }
-
-    protected override void onAttached(EntityInstance entity)
-    {
-        // Do nothing
-    }
-
-    protected override void onDetached(EntityInstance entity)
-    {
-        // Do nothing
-    }
 }

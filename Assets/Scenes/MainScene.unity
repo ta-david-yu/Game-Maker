@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06123fa76e05c1840abd705fd372ae3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_GameScoreGlobalHandler: {fileID: 11400000, guid: aa15a504e4c67d94fb455e8af5755ac7, type: 2}
   m_GameLoopSystems:
   - {fileID: 11400000, guid: 24c87bf2bb00e504dbf8423664d08ae1, type: 2}
   - {fileID: 11400000, guid: 8ddc081a54fdba54b9d409983b13e4bd, type: 2}
@@ -1089,7 +1090,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1660112666}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1158,7 +1159,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_SceneGlobalHandler: {fileID: 11400000, guid: 473e62d20640e3f4580573b14070205c, type: 2}
   m_CameraHandler: {fileID: 11400000, guid: b2f79a811ddfcc74bb32b624278761cb, type: 2}
-  m_PlayModeManager: {fileID: 5672697}
+  m_GameScoreGlobalHandler: {fileID: 11400000, guid: aa15a504e4c67d94fb455e8af5755ac7, type: 2}
+  m_PlayModeUpdater: {fileID: 5672697}
   m_Tools:
   - {fileID: 887873466}
   - {fileID: 320830969}
