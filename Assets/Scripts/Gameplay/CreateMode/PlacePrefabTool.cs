@@ -22,7 +22,7 @@ public class PlacePrefabTool : CreateModeToolBase
     [UnityEngine.Serialization.FormerlySerializedAs("m_LayerMask")]
     private LayerMask m_CreateLayerMask;
 
-    [Header("Runtime")]
+    [Header("Runtime Debug Fields. Do not modify them manually")]
 
     [SerializeField]
     private int m_CurrentPrefabIndex = 0;
@@ -56,9 +56,22 @@ public class PlacePrefabTool : CreateModeToolBase
 
                 using (new GUILayout.VerticalScope())
                 {
-                    if (GUILayout.Button($"{entityData.EntityName}"))
+                    using (new GUILayout.HorizontalScope())
                     {
-                        m_CurrentPrefabIndex = i;
+                        if (GUILayout.Button("x", GUILayout.Width(25)))
+                        {
+                            m_EntityPrefabGlobalHandler.RemovePrefab(i);
+                            if (m_CurrentPrefabIndex == i)
+                            {
+                                m_CurrentPrefabIndex = 0;
+                            }
+                            break;
+                        }
+
+                        if (GUILayout.Button($"{entityData.EntityName}"))
+                        {
+                            m_CurrentPrefabIndex = i;
+                        }
                     }
                 }
             }

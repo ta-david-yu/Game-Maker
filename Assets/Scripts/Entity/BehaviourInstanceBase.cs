@@ -69,9 +69,4 @@ public abstract class BehaviourInstanceBase : MonoBehaviour
     /// </summary>
     /// <param name="timeStep"></param>
     public abstract void OnUpdate(float timeStep);
-
-    /// <summary>
-    /// Used in play mode
-    /// </summary>
-    public abstract void OnClick();
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Select and inspect entity in the scene
@@ -24,17 +25,43 @@ public class SelectionTool : CreateModeToolBase
     [SerializeField]
     private float m_InspectorFieldNameWidth = 80;
 
-    [Header("Runtime")]
+    [Space]
+
+    public UnityEvent<EntityInstance> OnSelectedEntityInstanceChanged;
+
+    [Header("Runtime Debug Fields. Do not modify them manually")]
 
     [SerializeField]
     private EntityInstance m_SelectedEntityInstance;
+    public EntityInstance SelectedEntityInstance
+    {
+        get { return m_SelectedEntityInstance; }
+        private set
+        {
+            var prev = m_SelectedEntityInstance;
+            if (prev != value)
+            {
+                m_SelectedEntityInstance = value;
+                OnSelectedEntityInstanceChanged.Invoke(value);
+            }
+        }
+    }
 
     private Vector2 m_SceneHierarchyScrollPos;
     private bool m_IsAddBehaviourListOn = false;
 
     public override void OnClick(Ray ray)
     {
-
+        // Select entity instance
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+        {
+            EntityInstance entityInstance;
+            if (hit.collider.TryGetComponent(out entityInstance))
+            {
+                SelectedEntityInstance = entityInstance;
+            }
+        }
     }
 
     public override void DrawGUI()
@@ -46,7 +73,7 @@ public class SelectionTool : CreateModeToolBase
             if (GUILayout.Button("New Scene"))
             {
                 m_SceneGlobalHandler.CreateNewScene();
-                m_SelectedEntityInstance = null;
+                SelectedEntityInstance = null;
             }
 
             // Entity Hierarchy
@@ -62,19 +89,19 @@ public class SelectionTool : CreateModeToolBase
                     {
                         if (GUILayout.Button("x", GUILayout.Width(25)))
                         {
-                            if (entry.Instance.GetInstanceID() == m_SelectedEntityInstance.GetInstanceID())
+                            if (entry.Instance == SelectedEntityInstance)
                             {
-                                m_SelectedEntityInstance = null;
+                                SelectedEntityInstance = null;
                             }
                             m_SceneGlobalHandler.DeleteEntityEntry(entry);
                             break;
                         }
 
                         var originalGUIColor = GUI.color;
-                        GUI.color = (entry.Instance == m_SelectedEntityInstance) ? Color.yellow : originalGUIColor;
+                        GUI.color = (entry.Instance == SelectedEntityInstance) ? Color.yellow : originalGUIColor;
                         if (GUILayout.Button($"{entry.Data.EntityName}", GUILayout.MaxWidth(180)))
                         {
-                            m_SelectedEntityInstance = entry.Instance;
+                            SelectedEntityInstance = entry.Instance;
                         }
                         GUI.color = originalGUIColor;
                     }
@@ -82,9 +109,9 @@ public class SelectionTool : CreateModeToolBase
             }
 
             // Entity Inspector
-            if (m_SelectedEntityInstance)
+            if (SelectedEntityInstance)
             {
-                var entry = m_SceneGlobalHandler.GetEntityEntry(m_SelectedEntityInstance.ID);
+                var entry = m_SceneGlobalHandler.GetEntityEntry(SelectedEntityInstance.ID);
 
                 using (new GUILayout.VerticalScope(new GUIStyle("box")))
                 {
@@ -92,7 +119,7 @@ public class SelectionTool : CreateModeToolBase
                     using (new GUILayout.HorizontalScope())
                     {
                         GUILayout.Label("ID", GUILayout.Width(m_InspectorFieldNameWidth));
-                        GUILayout.Label(m_SelectedEntityInstance.ID.ToString());
+                        GUILayout.Label(SelectedEntityInstance.ID.ToString());
                     }
 
                     using (new GUILayout.HorizontalScope())

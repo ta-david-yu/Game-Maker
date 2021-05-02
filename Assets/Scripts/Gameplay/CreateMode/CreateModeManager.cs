@@ -17,10 +17,8 @@ public class CreateModeManager : MonoBehaviour
     [SerializeField]
     private SceneGlobalHandler m_SceneGlobalHandler;
 
-    [Header("Data")]
-
     [SerializeField]
-    private BehaviourCollectionSO m_BehaviourCollection;
+    private CameraGlobalHandler m_CameraHandler;
 
     [Header("Reference")]
 
@@ -31,12 +29,9 @@ public class CreateModeManager : MonoBehaviour
     private List<CreateModeToolBase> m_Tools;
 
     [SerializeField]
-    private Camera m_Camera;
-
-    [SerializeField]
     private Transform m_EntityRoot;
 
-    [Header("Runtime")]
+    [Header("Runtime Debug Fields. Do not modify them manually")]
 
     [SerializeField]
     private CreateModeToolBase m_CurrentTool;
@@ -57,11 +52,11 @@ public class CreateModeManager : MonoBehaviour
     private void Update()
     {
         if (!m_PlayModeManager.IsPlaying)
-        if (Input.GetMouseButtonDown(0))
-        {
-            var ray = m_Camera.ScreenPointToRay(Input.mousePosition);
-            m_CurrentTool.OnClick(ray);
-        }
+            if (Input.GetMouseButtonDown(0))
+            {
+                var ray = m_CameraHandler.Camera.ScreenPointToRay(Input.mousePosition);
+                m_CurrentTool.OnClick(ray);
+            }
     }
 
     private void OnGUI()
@@ -81,37 +76,42 @@ public class CreateModeManager : MonoBehaviour
                 if (GUILayout.Button("Play"))
                 {
                     m_PlayModeManager.EnterPlayMode();
+                    return;
                 }
-            }
 
-            // Tools
-            using (new GUILayout.VerticalScope(new GUIStyle("box")))
-            {
-                GUILayout.Label("Tools");
-                using (new GUILayout.HorizontalScope())
-                {
-                    var originalGUIColor = GUI.color;
-                    for (int i = 0; i < m_Tools.Count; i++)
-                    {
-                        var tool = m_Tools[i];
-
-                        GUI.color = (tool == m_CurrentTool) ? Color.yellow : originalGUIColor;
-                        if (GUILayout.Button(tool.gameObject.name))
-                        {
-                            m_CurrentTool = tool;
-                        }
-                    }
-                    GUI.color = originalGUIColor;
-                }
-            }
-
-            // Draw tools GUI
-            for (int i = 0; i < m_Tools.Count; i++)
-            {
-                var tool = m_Tools[i];
+                // Tools
                 using (new GUILayout.VerticalScope(new GUIStyle("box")))
                 {
-                    tool.DrawGUI();
+                    GUILayout.Label("Tools");
+                    using (new GUILayout.HorizontalScope())
+                    {
+                        var originalGUIColor = GUI.color;
+                        for (int i = 0; i < m_Tools.Count; i++)
+                        {
+                            var tool = m_Tools[i];
+
+                            GUI.color = (tool == m_CurrentTool) ? Color.yellow : originalGUIColor;
+                            if (GUILayout.Button(tool.gameObject.name))
+                            {
+                                m_CurrentTool = tool;
+                            }
+                        }
+                        GUI.color = originalGUIColor;
+                    }
+                }
+
+                // Draw tools GUI
+                for (int i = 0; i < m_Tools.Count; i++)
+                {
+                    var tool = m_Tools[i];
+                    
+                    GUI.enabled = tool == m_CurrentTool;
+                    using (new GUILayout.VerticalScope(new GUIStyle("box")))
+                    {
+                        tool.DrawGUI();
+                    }
+
+                    GUI.enabled = true;
                 }
             }
         }

@@ -60,16 +60,4 @@ public class EntityInstance : MonoBehaviour
     {
         m_Behaviours.Remove(behaviour);
     }
-
-    /// <summary>
-    /// On Click in play mode
-    /// </summary>
-    /// <param name="eventData"></param>
-    public void OnClick(PointerEventData eventData)
-    {
-        for (int i = 0; i < m_Behaviours.Count; i++)
-        {
-            m_Behaviours[i].OnClick();
-        }
-    }
 }

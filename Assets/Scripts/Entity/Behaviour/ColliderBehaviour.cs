@@ -29,10 +29,6 @@ public class ColliderBehaviour : BehaviourInstanceBase
         }
     }
 
-    public override void OnClick()
-    {
-    }
-
     public override void OnUpdate(float timeStep)
     {
     }

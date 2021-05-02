@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PrintBehaviour : BehaviourInstanceBase
+public class PrintBehaviour : BehaviourInstanceBase, IClickable
 {
     [SerializeField]
     private BehaviourParamSO m_MessageParamSO;
@@ -17,7 +17,7 @@ public class PrintBehaviour : BehaviourInstanceBase
         }
     }
 
-    public override void OnClick()
+    public void OnClick()
     {
         Debug.Log($"Message: {m_Message}");
     }

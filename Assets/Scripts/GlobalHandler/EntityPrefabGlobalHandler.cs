@@ -31,4 +31,9 @@ public class EntityPrefabGlobalHandler : ScriptableObject, ISerializationCallbac
     {
         m_EntityDatas.Add(data);
     }
+
+    public void RemovePrefab(int index)
+    {
+        m_EntityDatas.RemoveAt(index);
+    }
 }
