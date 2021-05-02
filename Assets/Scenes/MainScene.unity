@@ -134,7 +134,7 @@ GameObject:
   - component: {fileID: 5672696}
   - component: {fileID: 5672697}
   m_Layer: 0
-  m_Name: Play Mode Manager
+  m_Name: Playmode Updater
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

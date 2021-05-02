@@ -4,6 +4,9 @@ using System.Collections.ObjectModel;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// The game loop updater in playmode
+/// </summary>
 public class PlayModeUpdater : MonoBehaviour
 {
     [SerializeField]
