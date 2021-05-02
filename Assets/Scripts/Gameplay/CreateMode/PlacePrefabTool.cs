@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 /// <summary>
 /// Select and place entity prefab in the scene
@@ -22,6 +23,8 @@ public class PlacePrefabTool : CreateModeToolBase
     [UnityEngine.Serialization.FormerlySerializedAs("m_LayerMask")]
     private LayerMask m_CreateLayerMask;
 
+    public UnityEvent<EntityInstance> OnNewEntityInstanceCreated;
+
     [Header("Runtime Debug Fields. Do not modify them manually")]
 
     [SerializeField]
@@ -37,6 +40,7 @@ public class PlacePrefabTool : CreateModeToolBase
         {
             var entry = m_SceneGlobalHandler.CreateEntity(m_EntityPrefabGlobalHandler.EntityDatas[m_CurrentPrefabIndex]);
             entry.Instance.transform.position = hit.point;
+            OnNewEntityInstanceCreated.Invoke(entry.Instance);
         }
     }
 

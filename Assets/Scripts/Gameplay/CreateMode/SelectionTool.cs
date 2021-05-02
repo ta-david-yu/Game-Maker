@@ -36,7 +36,7 @@ public class SelectionTool : CreateModeToolBase
     public EntityInstance SelectedEntityInstance
     {
         get { return m_SelectedEntityInstance; }
-        private set
+        set
         {
             var prev = m_SelectedEntityInstance;
             if (prev != value)
