@@ -6,3 +6,4 @@ For more details, checkout [Game Maker Challenge](https://github.com/lumpn/gamed
 
 ## Screenshots
 ![Create Mode](./Documentation/Createmode.png?raw=true "Create Mode")
+![Play Mode](./Documentation/Playmode.png?raw=true "Play Mode")
