@@ -52,6 +52,8 @@ public class PlacePrefabTool : CreateModeToolBase
 
         using (var scrollView = new GUILayout.ScrollViewScope(m_PrefabListScrollPos, GUILayout.Height(m_PrefabListWindowHeight)))
         {
+            m_PrefabListScrollPos = scrollView.scrollPosition;
+
             for (int i = 0; i < m_EntityPrefabGlobalHandler.EntityDatas.Count; i++)
             {
                 GUI.color = (i == m_CurrentPrefabIndex) ? Color.yellow : originalGUIColor;
@@ -62,7 +64,8 @@ public class PlacePrefabTool : CreateModeToolBase
                 {
                     using (new GUILayout.HorizontalScope())
                     {
-                        if (GUILayout.Button("x", GUILayout.Width(25)))
+                        if (m_EntityPrefabGlobalHandler.EntityDatas.Count > 1 && 
+                            GUILayout.Button("x", GUILayout.Width(25)))
                         {
                             m_EntityPrefabGlobalHandler.RemovePrefab(i);
                             if (m_CurrentPrefabIndex == i)
